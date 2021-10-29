@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  httpd:
+    image: dcjulian29/httpd:latest
+    environment:
+      - TZ=America/New_York
+    volumes:
+      - ./.docker/static:/www:ro
+    ports:
+      - 8080:3000
