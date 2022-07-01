@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'Dockerfile'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'Dockerfile'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Grab the THTTPD version to use.
+        id: vars
+        run: echo "::set-output name=version::$(cat VERSION)"
+
+      - name: Build the Docker Image.
+        run: docker build . --build-arg THTTPD_VERSION=${{ steps.vars.outputs.version }} --tag ${{ steps.vars.outputs.version }}-ci:$(date +%s)
