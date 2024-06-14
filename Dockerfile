@@ -1,4 +1,7 @@
-FROM alpine:latest AS builder
+FROM alpine:3.20 AS builder
+
+LABEL org.opencontainers.image.source="https://github.com/dcjulian29/docker-httpd"
+LABEL org.opencontainers.image.description="A Docker Container for Tiny HTTPD Server"
 
 ARG THTTPD_VERSION=2.29
 
